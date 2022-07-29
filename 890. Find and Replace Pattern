@@ -1,0 +1,23 @@
+class Solution:
+    def findAndReplacePattern(self, words: List[str], pattern: str) -> List[str]:
+        '''
+        Same question to 205 Isomorphic Strings
+        '''
+        result = []
+        for word in words:
+            proj = {} # projections, patter[i] => word[i]
+            used = set() # used word[i]
+            
+            for i, p in enumerate(pattern):
+                if p in proj:
+                    if word[i] != proj[p]:
+                        break
+                else:
+                    if word[i] in used:
+                        break
+                    proj[p] = word[i]
+                    used.add(word[i])
+            else:
+                result.append(word)
+                
+        return result
